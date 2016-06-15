@@ -53,7 +53,8 @@
 
     //track select function for onended and manual selecting tracks
     var trackSelect=function(track){
-
+      //console.log(track)
+      if ( track == undefined) return;
        //get new src
         var src=track.getAttribute('data-src');
         index=parseInt(track.getAttribute('data-index')) || index;
@@ -62,7 +63,7 @@
         if(player.techName=='youtube'){
            player.src([
             { type: type="video/youtube", src:  src}
-          ]);
+          ]); 
         }
         else{
 
@@ -88,9 +89,8 @@
             }
         }
 
-
-
-        if(play) player.play();
+        //if(play) 
+        player.play();
 
         //remove 'currentTrack' CSS class
         for(var i=0; i<trackCount; i++){
@@ -131,13 +131,13 @@
       },
       prev:function(){
         var j=index-1;
-        //console.log('j'+j);
+        console.log('j'+j);
         if(j<0 || j>trackCount) j=0;
         trackSelect(tracks[j]);
       },
       next:function(){
         var j=index+1;
-        //console.log('j'+j);
+        console.log('j'+j);
         if(j<0 || j>trackCount) j=0;
         trackSelect(tracks[j]);
       }
