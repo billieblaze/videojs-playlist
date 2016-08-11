@@ -4,7 +4,7 @@
   //this.L="vjs_common_one";
   
 
-  console.log(this);
+  //console.log(this);
   var id=this.el().id;
 
   //console.log('begin playlist plugin with video id:'+id);
@@ -49,7 +49,7 @@
 
         });// on ended
     }
-    else;// console.log('dont play next!');
+    
 
     //track select function for onended and manual selecting tracks
     var trackSelect=function(track){
@@ -92,16 +92,6 @@
         //if(play) 
         player.play();
 
-        //remove 'currentTrack' CSS class
-        for(var i=0; i<trackCount; i++){
-            if (tracks[i].className.indexOf('currentTrack') !== -1) {
-                tracks[i].className=tracks[i].className.replace(/\bcurrentTrack\b/,'nonPlayingTrack');
-            }
-        }
-        //add 'currentTrack' CSS class
-        track.className = track.className + " currentTrack";
-        if(typeof onTrackSelected === 'function') onTrackSelected.apply(track);
-
     }
 
     //if want to start at track other than 1st track
@@ -140,14 +130,14 @@
       prev:function(){
         var j=index-1;
         console.log('j'+j);
-        if(j<0 || j>trackCount) j=0;
-        trackSelect(tracks[j]);
+        if(j<0 ) j=trackCount;
+        this.trackSelect(j);
       },
       next:function(){
         var j=index+1;
         console.log('j'+j);
-        if(j<0 || j>trackCount) j=0;
-        trackSelect(tracks[j]);
+        if( j>trackCount) j=0;
+        this.trackSelect(j);
       }
     };
     return data;
