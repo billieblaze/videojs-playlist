@@ -123,6 +123,14 @@
     var data={
       tracks: tracks,
       trackCount: trackCount,
+      trackSelect: function(index){
+        // wait for angular to fill the dom...  
+        setTimeout( function(){
+          tracks = document.querySelectorAll("#"+id+"-vjs-playlist .vjs-track");
+          trackSelect(tracks[index]);
+        }, 20 );
+        
+      }, 
       play:function(){
         return play;
       },
