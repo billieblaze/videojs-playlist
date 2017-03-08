@@ -2,7 +2,7 @@
 
  videojs.plugin('playlist', function(options) {
   //this.L="vjs_common_one";
-  
+
 
   //console.log(this);
   var id=this.el().id;
@@ -49,10 +49,10 @@
 
         });// on ended
     }
-    
+
 
     //track select function for onended and manual selecting tracks
-    var trackSelect=function(track){
+    var trackSelect=function(track, play){
       //console.log(track)
       if ( track == undefined) return;
        //get new src
@@ -63,7 +63,7 @@
         if(player.techName=='youtube'){
            player.src([
             { type: type="video/youtube", src:  src}
-          ]); 
+          ]);
         }
         else{
 
@@ -80,7 +80,7 @@
             }
             else{
             //console.log("video");
-              player.src([                
+              player.src([
                 { type: "video/mp4", src:  src+".mp4" },
                 { type: type="video/youtube", src:  src},
                 { type: "video/webm", src: src+".webm" }
@@ -89,8 +89,7 @@
             }
         }
 
-        //if(play) 
-        player.play();
+        if(play) player.play();
 
     }
 
@@ -113,14 +112,14 @@
     var data={
       tracks: tracks,
       trackCount: trackCount,
-      trackSelect: function(index){
-        // wait for angular to fill the dom...  
+      trackSelect: function(index, play){
+        // wait for angular to fill the dom...
         setTimeout( function(){
           tracks = document.querySelectorAll("#"+id+"-vjs-playlist .vjs-track");
-          trackSelect(tracks[index]);
+          trackSelect(tracks[index], play);
         }, 20 );
-        
-      }, 
+
+      },
       play:function(){
         return play;
       },
